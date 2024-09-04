@@ -1,4 +1,5 @@
 ﻿using IJGZ20240903.Auth;
+using Microsoft.AspNetCore.Authorization;
 using System.Runtime.CompilerServices;
 
 namespace IJGZ20240903.Endpoints
@@ -24,6 +25,13 @@ namespace IJGZ20240903.Endpoints
                     //si las credenciales no son válidas, devuele una repsuesta HTTP Unauthorized(401).
                     return Results.Unauthorized();
                 }
+            });
+
+            // Endpoint para cerrar sesión (requiere autenticación)
+            app.MapPost("/account/logout", [Authorize] () =>
+            {
+                // Aquí podrías implementar la lógica para invalidar el token si fuera necesario
+                return Results.Ok("Logged out successfully");
             });
 
         }
